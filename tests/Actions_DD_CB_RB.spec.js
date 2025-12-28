@@ -22,3 +22,17 @@ test('Dropdown and Checkbox Test',async ({page})=>{
     //to puse the execution we use await page.pause()
     //await page.pause();
 });
+
+test('To click on the checkBoxes',async ({page})=>{
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+    const checkBoxes = page.locator("input[type='checkbox']");
+    //To check the number of checkboxes
+    console.log(await checkBoxes.count());
+    //await page.pause();
+    //To click on the first checkbox
+    await checkBoxes.nth(0).check();
+    expect (await checkBoxes.nth(0).isChecked()).toBeTruthy();
+    //To uncheck the first checkbox
+    await checkBoxes.nth(0).uncheck();
+    expect (await checkBoxes.nth(0).isChecked()).toBeFalsy();
+});
