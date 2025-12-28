@@ -21,7 +21,21 @@ test('Simple checkbox test',async ({page}) =>{
     expect(await page.getByText("Click on check box").isChecked()).toBeFalsy();
 });
 
-test('Multiple Check Boxes', async({page}) =>{
+test('Radio Button Test', async({page}) =>{
+    await page.goto("https://www.lambdatest.com/selenium-playground/radiobutton-demo");
+    // Check the first radio button
+    const maleFirst = page.locator("input[value='Male']").first();
+    const femaleFirst = page.locator("input[value='Female']").first();
+    expect (await maleFirst.isChecked()).toBeFalsy();
+    await maleFirst.click();
+    expect (await maleFirst.isChecked()).toBeTruthy();
+    await page.locator('#buttoncheck').click();
+    expect (await page.locator("p[class*='radiobutton']")).toHaveText("Radio button 'Male' is checked");
+    //await page.pause();
+    expect (await femaleFirst.isChecked()).toBeFalsy();
+});    
+
+test('Check Boxes', async({page}) =>{
     await page.goto("https://www.lambdatest.com/selenium-playground/checkbox-demo");
     expect(await page.locator("input[name='option1']").isChecked()).toBeFalsy();
     await page.locator("input[name='option1']").click();
@@ -36,4 +50,12 @@ test('Multiple Check Boxes', async({page}) =>{
     expect(await page.locator("input[name='option3']").isChecked()).toBeTruthy();
     
     
-});                                                                                                                             
+});    
+
+test('Multiple Check Boxes', async({page}) =>{
+    await page.goto("https://www.lambdatest.com/selenium-playground/select-dropdown-demo");
+    await page.selectOption("#multi-select",["New York","Ohio","Texas"]);
+    const selectedOptions = await page.locator("#multi-select option:checked").allTextContents();
+    console.log(selectedOptions);
+    expect(selectedOptions).toEqual(["New York","Ohio","Texas"]);
+});
