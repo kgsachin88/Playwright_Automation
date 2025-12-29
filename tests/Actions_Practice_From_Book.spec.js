@@ -48,8 +48,7 @@ test('Check Boxes', async({page}) =>{
     expect(await page.locator("input[name='option3']").isChecked()).toBeFalsy();
     await page.locator("input[name='option3']").click();
     expect(await page.locator("input[name='option3']").isChecked()).toBeTruthy();
-    
-    
+      
 });    
 
 test('Multiple Check Boxes', async({page}) =>{
@@ -58,4 +57,15 @@ test('Multiple Check Boxes', async({page}) =>{
     const selectedOptions = await page.locator("#multi-select option:checked").allTextContents();
     console.log(selectedOptions);
     expect(selectedOptions).toEqual(["New York","Ohio","Texas"]);
+});
+
+test('Drag and Drop demo', async({page}) =>{
+    await page.goto("https://www.lambdatest.com/selenium-playground/drag-and-drop-demo");
+    const dragitem1 = page.getByText("Draggable 1");
+    const dragitem2 = page.getByText("Draggable 2");
+    const dropzone = page.locator("#mydropzone");
+    await dragitem1.dragTo(dropzone);
+    await dragitem2.dragTo(dropzone);
+    //await expect(page.locator("#droppedlist",{hasText: ["Draggable 1"]})).toBeVisible();
+    await expect(page.locator("#droppedlist span")).toHaveText(['Draggable 1','Draggable 2']);
 });
