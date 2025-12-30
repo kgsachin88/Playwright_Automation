@@ -69,3 +69,44 @@ test('Drag and Drop demo', async({page}) =>{
     //await expect(page.locator("#droppedlist",{hasText: ["Draggable 1"]})).toBeVisible();
     await expect(page.locator("#droppedlist span")).toHaveText(['Draggable 1','Draggable 2']);
 });
+
+test('File Download Test', async({page}) =>{
+    const filedownloadButton = page.locator("button.btn.btn-primary");
+    await page.goto("https://www.lambdatest.com/selenium-playground/download-file-demo");
+    // Start waiting for the download
+    const [download] = await Promise.all([
+        page.waitForEvent('download'),
+        filedownloadButton.click(), // Triggers the download
+    ]);
+    console.log(download.suggestedFilename());
+    const filePath = 'downloads/' + download.suggestedFilename();
+    // Save downloaded file somewhere
+    await download.saveAs(filePath);
+    // Check if the file is saved successfully
+    expect(await download.path()).toBeTruthy();
+
+});
+
+test('handling elements in iFrames', async({page}) =>{
+    await page.goto("https://www.lambdatest.com/selenium-playground/iframe-demo/");
+    const textEnter = await page.frameLocator('#iFrame1').locator("//div[@class='rsw-ce']");
+    await textEnter.fill("Test Successful");
+    await expect(textEnter).toHaveText("Test Successful");
+});
+
+test('Sample Ecommerce Login Test', async({page}) => {
+
+    const userName = 'sachin.kg@grr.la';
+    const passWord = 'Password@2';
+    await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
+    await page.locator('#userEmail').fill(userName);
+    await page.locator('#userPassword').fill(passWord);
+    await page.locator('#login').click();
+    await page.waitForLoadState('networkidle');
+    const products = page.locator('.card-body');
+    const productCount = await products.count();
+    const titles = await page.locator('.card-body b').allTextContents();
+    console.log(titles);
+    console.log("Total Products: " + productCount);
+
+});
