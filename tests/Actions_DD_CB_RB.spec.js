@@ -36,3 +36,5 @@ test('To click on the checkBoxes',async ({page})=>{
     await checkBoxes.nth(0).uncheck();
     expect (await checkBoxes.nth(0).isChecked()).toBeFalsy();
 });
+
+// Sample changes
