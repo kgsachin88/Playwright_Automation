@@ -39,3 +39,24 @@ test('LoginPage Error validation Test',async ({page})=>{
     await expect(page.locator("[style*='block']")).toContainText('Incorrect username/password');
 
 });
+
+test('Handeling the child windows',async ({browser})=>{
+
+    const documentlink = 'a[href*="documents-request"]';
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    const [newPage] = await Promise.all([
+        context.waitForEvent('page'),
+        page.locator(documentlink).click()
+    ]);
+    const text = await newPage.locator('.red').textContent();
+    const arrayText = text.split('@');
+    const domain = arrayText[1].split(' ')[0];
+    console.log(domain.split('.')[0]);
+    await page.bringToFront();
+    await page.locator('#username').fill(domain.split('.')[0]);
+    //await page.pause()
+    console.log(await page.locator('#username').textContent());
+    console.log(await page.locator('#username').inputValue());
+});
