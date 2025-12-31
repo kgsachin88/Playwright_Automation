@@ -1,15 +1,13 @@
 const{expect, test} = require('@playwright/test');
+const Creds = require('../TestData/creds.json');
 
 test('Sample Ecommerce Test', async({page}) => {
 
-    const userName = 'sachin.kg@grr.la';
-    const passWord = 'Password@2';
     const productName = 'ADIDAS ORIGINAL';
     await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
-    await page.locator('#userEmail').fill(userName);
-    await page.locator('#userPassword').fill(passWord);
+    await page.locator('#userEmail').fill(Creds.admin.username);
+    await page.locator('#userPassword').fill(Creds.admin.password);
     await page.locator('#login').click();
-    await page.waitForLoadState('networkidle');
     await page.locator('.card-body b').first().waitFor();
     const products = page.locator('.card-body');
     const productCount = await products.count();

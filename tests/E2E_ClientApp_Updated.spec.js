@@ -1,15 +1,16 @@
 const{expect, test} = require('@playwright/test');
 
+
 test('Sample Ecommerce Test', async({page}) => {
 
-    const userName = 'sachin.kg@grr.la';
-    const passWord = 'Password@2';
+
     const productName = 'ADIDAS ORIGINAL';
-    await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
-    await page.getByPlaceholder('email@example.com').fill(userName);
-    await page.getByPlaceholder('enter your passsword').fill(passWord);
+    //await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
+    console.log(process.env.APPUSERNAME);
+    console.log(process.env.APPPASSWORD); 
+    await page.getByPlaceholder('email@example.com').fill(process.env.APPUSERNAME);
+    await page.getByPlaceholder('enter your passsword').fill(process.env.APPPASSWORD);
     await page.getByRole('button', { name: 'login' }).click();
-    //await page.waitForLoadState('networkidle');
     await page.locator('.card-body b').first().waitFor();
     const products = page.locator('.card-body');
     const productCount = await products.count();
