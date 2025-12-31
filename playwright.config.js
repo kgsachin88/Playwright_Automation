@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+require('dotenv').config();
 
 /**
  * Read environment variables from file.
@@ -34,6 +35,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     headless: false,
   },
+
 
   /* Configure projects for major browsers */
   projects: [

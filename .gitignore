@@ -16,3 +16,6 @@ node_modules/
 /downloads/
 /screenshots/
 /videos/
+/tests/visualTesting.spec.js-snapshots/
+*.env
+*json
