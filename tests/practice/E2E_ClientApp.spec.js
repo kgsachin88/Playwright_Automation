@@ -1,5 +1,5 @@
 const{expect, test} = require('@playwright/test');
-const Creds = require('../TestData/creds.json');
+const Creds = require('../../TestData/creds.json');
 
 test('Sample Ecommerce Test', async({page}) => {
 
