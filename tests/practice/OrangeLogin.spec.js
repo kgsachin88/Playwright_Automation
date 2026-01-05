@@ -1,5 +1,5 @@
 const{expect, test} = require('@playwright/test');
-const Creds = require('../TestData/creds.json');
+const Creds = require('../../TestData/creds.json');
 
 test('OrangeHRM Login Test', async({page}) => {
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
