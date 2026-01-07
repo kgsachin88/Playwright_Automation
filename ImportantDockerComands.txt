@@ -1,0 +1,8 @@
+To Download the Playwright docoker container and to copy the code into and install
+=>"docker build -t playwright-tests"
+To run without downloading the report
+=>"docker run playwright-tests"
+To run the Tests in the DOcker Container and to copy the results back from the container to the local results 
+=>"docker run -v "${PWD}/playwright-report:/app/playwright-report" playwright-tests"
+To See the reports locally
+=>"npx playwright show-report playwright-report"

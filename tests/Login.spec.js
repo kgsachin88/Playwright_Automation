@@ -20,5 +20,21 @@ test('Login into the orangeCRM Demo Website with invalid credentials',async({log
     await loginPage.verifyErrorMessage();
 });
 
+test('Login into the orangeCRM Demo Website without entering any credentials',async({loginPage}) => {
+    await loginPage.login("", "");
+    await loginPage.verifyRequiredFieldMessage();
+});
+
+test('Verify Forgot Password Link on Login Page',async({loginPage}) => {
+    await loginPage.verifyForgotPasswordLink();
+});
+
+test('Login functionality e2e --> Login to Logout',async({loginPage, dashboardPage}) => {
+    
+    await loginPage.login(process.env.orgcrmUN, process.env.orgcrmPWD);
+    await dashboardPage.verifyDashboardPage();
+    await dashboardPage.logout();
+    await loginPage.verifyLoginPageTitle();
+});
 
 });
