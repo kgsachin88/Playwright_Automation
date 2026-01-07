@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test",
+    "test": "playwright test",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
+    "test:chromium": "playwright test --project=chromium",
     "report": "npx playwright show-report"
   },
   "keywords": [],
