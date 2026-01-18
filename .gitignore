@@ -19,3 +19,5 @@ node_modules/
 /tests/visualTesting.spec.js-snapshots/
 *.env
 *json
+allure-results/
+allure-report/

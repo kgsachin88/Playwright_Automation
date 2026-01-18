@@ -15,9 +15,12 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.3"
+    "@types/node": "^25.0.3",
+    "allure-commandline": "^2.36.0",
+    "allure-playwright": "^3.4.5"
   },
   "dependencies": {
+    "@zerostep/playwright": "^0.1.5",
     "dotenv": "^17.2.3",
     "exceljs": "^4.4.0"
   }
